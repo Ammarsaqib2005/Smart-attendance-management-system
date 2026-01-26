@@ -1,16 +1,17 @@
-import { auth, db } from "./firebase/firebase"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from "./auth/Signup";
+import Login from "./auth/Login";
 
 function App() {
-  console.log("Firebase Auth:", auth);
-  console.log("Firestore DB:", db);
-
+  
   return (
-    <>
-     <div className="App">
-      <h1>Smart attendance system</h1>
-     </div>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
