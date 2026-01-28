@@ -13,7 +13,11 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful ✅");
     } catch (error) {
-      alert(error.message);
+      if (error.code === "auth/invalid-credential") {
+        alert("Invalid email or password");
+      } else {
+        alert(error.message);
+      }
     }
   };
 
@@ -43,6 +47,12 @@ function Login() {
           Login
         </button>
       </form>
+      <p className="text-center mt-3 text-sm">
+        Don’t have an account?{" "}
+        <a href="/signup" className="text-green-500">
+          Signup
+        </a>
+      </p>
     </AuthLayout>
   );
 }

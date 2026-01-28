@@ -43,6 +43,10 @@ function Signup() {
           Signup
         </button>
       </form>
+      <p className="text-center mt-3 text-sm">
+        Already have an account?{" "}
+        <a href="/login" className="text-blue-500">Login</a>
+      </p>
     </AuthLayout>
   );
 }
