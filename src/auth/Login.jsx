@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful ✅");
+      // alert("Login successful ✅");
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/invalid-credential") {
         alert("Invalid email or password");

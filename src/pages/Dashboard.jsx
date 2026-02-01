@@ -1,5 +1,6 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import DashboardLayout from "../components/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
@@ -11,6 +12,7 @@ function Dashboard() {
   };
 
   return (
+    <DashboardLayout>
     <div>
       <h1>Dashboard</h1>
 
@@ -28,8 +30,9 @@ function Dashboard() {
 
       <br /><br />
 
-      <button onClick={handleLogout}>Logout</button>
+      {/* <button onClick={handleLogout}>Logout</button> */}
     </div>
+    </DashboardLayout>
   );
 }
 
