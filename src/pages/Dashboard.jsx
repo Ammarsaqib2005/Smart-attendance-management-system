@@ -14,8 +14,8 @@ function Dashboard() {
   return (
     <DashboardLayout>
     <div>
-      <h1>Dashboard</h1>
-
+      <h1 className="page-title">Dashboard</h1>
+      <div className="dashboard-actions">
       <button onClick={() => navigate("/add-student")}>
         Add Student
       </button>
@@ -31,6 +31,7 @@ function Dashboard() {
       <br /><br />
 
       {/* <button onClick={handleLogout}>Logout</button> */}
+      </div>
     </div>
     </DashboardLayout>
   );

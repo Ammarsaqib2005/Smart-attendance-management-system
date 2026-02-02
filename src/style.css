@@ -8,118 +8,104 @@
 
 /* ===== GLOBAL ===== */
 body {
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background-color: #f4f6f8;
-  color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
 }
 
-/* ===== CARD LAYOUT ===== */
-.card {
-  width: 100%;
-  max-width: 420px;
-  margin: 80px auto;
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+/* ===== HEADER ===== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background-color: #2563eb;
+  color: white;
 }
 
-/* ===== HEADINGS ===== */
-h1 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-h2 {
-  text-align: center;
+.app-header h1 {
   font-size: 18px;
+  font-weight: 500;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  padding: 6px 14px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* ===== MAIN CONTENT ===== */
+.app-content {
+  padding: 30px;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title {
+  font-size: 20px;
   margin-bottom: 20px;
-  color: #374151;
-}
-
-/* ===== INPUTS ===== */
-input,
-select {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 14px;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #2563eb;
 }
 
 /* ===== BUTTONS ===== */
 button {
-  width: 100%;
-  padding: 11px;
-  border-radius: 6px;
+  padding: 10px 16px;
   border: none;
+  border-radius: 5px;
   background-color: #2563eb;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
-  font-weight: 500;
   cursor: pointer;
-  margin-top: 8px;
 }
 
 button:hover {
-  background-color: #1e40af;
+  background-color: #1d4ed8;
 }
 
-button.secondary {
-  background-color: #6b7280;
+/* ===== BUTTON LIST ===== */
+.button-list button {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
 }
 
-button.secondary:hover {
-  background-color: #4b5563;
+/* ===== INPUTS ===== */
+input, select {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-/* ===== LIST ROWS ===== */
+/* ===== ROWS (attendance list) ===== */
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  gap: 10px;
 }
 
-.row span {
-  font-size: 14px;
-}
-
-/* ===== NAV BUTTON GROUP ===== */
-.nav-buttons button {
-  margin-bottom: 10px;
-}
-
-/* ===== DASHBOARD HEADER ===== */
-.dashboard-header {
+.button-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
-.dashboard-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-/* ===== LOGOUT BUTTON ===== */
-.logout-btn {
-  width: auto;
-  padding: 6px 14px;
-  background-color: #ef4444;
-  font-size: 13px;
-}
-
-.logout-btn:hover {
-  background-color: #dc2626;
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;       /* ← THIS controls spacing */
+  margin-top: 30px;
 }

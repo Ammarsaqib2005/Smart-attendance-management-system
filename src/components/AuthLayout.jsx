@@ -1,7 +1,7 @@
 function AuthLayout({ children }) {
   return (
-    <div className="card">
-      <h1>Smart Attendance</h1>
+    <div className="app-content">
+      <h1 style={{ marginBottom: "20px" }}>Smart Attendance</h1>
       {children}
     </div>
   );

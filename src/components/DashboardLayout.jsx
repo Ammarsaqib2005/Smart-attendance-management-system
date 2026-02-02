@@ -11,18 +11,20 @@ function DashboardLayout({ children }) {
   };
 
   return (
-    <div className="card">
+    <>
       {/* Header */}
-      <div className="dashboard-header">
-        <h1>Teacher Panel</h1>
+      <div className="app-header">
+        <h1>Smart Attendance</h1>
         <button className="logout-btn" onClick={logout}>
           Logout
         </button>
       </div>
 
-      {/* Page Content */}
-      {children}
-    </div>
+      {/* Content */}
+      <div className="app-content">
+        {children}
+      </div>
+    </>
   );
 }
 
