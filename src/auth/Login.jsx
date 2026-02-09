@@ -2,6 +2,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 import AuthLayout from "../components/AuthLayout";
 
 function Login() {
@@ -12,15 +14,24 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // alert("Login successful ✅");
-      navigate("/");
-    } catch (error) {
-      if (error.code === "auth/invalid-credential") {
-        alert("Invalid email or password");
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const role = userDoc.data().role;
+
+      if (role === "admin") {
+        navigate("/");
       } else {
-        alert(error.message);
+        navigate("/student");
       }
+    } catch (error) {
+      alert(error.message);
     }
   };
 
