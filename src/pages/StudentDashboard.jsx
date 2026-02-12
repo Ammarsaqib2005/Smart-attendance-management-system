@@ -1,58 +1,64 @@
-import { useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { auth } from "../firebase/firebase";
 import { db } from "../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 function StudentDashboard() {
-  const [rollNo, setRollNo] = useState("");
-  const [records, setRecords] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [present, setPresent] = useState(0);
+  const [absent, setAbsent] = useState(0);
 
-  const fetchAttendance = async () => {
-    if (!rollNo) {
-      alert("Enter roll number");
-      return;
-    }
+  useEffect(() => {
+    const fetchAttendance = async () => {
+      const user = auth.currentUser;
 
-    const attendanceSnap = await getDocs(collection(db, "attendance"));
-    let result = [];
+      if (!user) return;
 
-    for (let dateDoc of attendanceSnap.docs) {
-      const recordsSnap = await getDocs(
-        collection(db, "attendance", dateDoc.id, "records")
+      const attendanceSnapshot = await getDocs(
+        collection(db, "attendance")
       );
 
-      recordsSnap.forEach((docu) => {
-        const data = docu.data();
-        if (data.rollNo === rollNo) {
-          result.push({
-            date: dateDoc.id,
-            status: data.status,
-          });
-        }
-      });
-    }
+      let totalClasses = 0;
+      let presentCount = 0;
+      let absentCount = 0;
 
-    setRecords(result);
-  };
+      for (let docSnap of attendanceSnapshot.docs) {
+        const recordsSnapshot = await getDocs(
+          collection(db, "attendance", docSnap.id, "records")
+        );
 
+        recordsSnapshot.forEach((record) => {
+          if (record.id === user.uid) {
+            totalClasses++;
+
+            if (record.data().status === "Present") {
+              presentCount++;
+            } else {
+              absentCount++;
+            }
+          }
+        });
+      }
+
+      setTotal(totalClasses);
+      setPresent(presentCount);
+      setAbsent(absentCount);
+    };
+
+    fetchAttendance();
+  }, []);
+
+  const percentage =
+    total > 0 ? ((present / total) * 100).toFixed(2) : 0;
+  console.log("Current UID:", auth.currentUser?.uid);
   return (
-    <div className="container">
-      <h2>Student Attendance</h2>
+    <div>
+      <h2>Student Dashboard</h2>
 
-      <input
-        placeholder="Enter Roll No"
-        value={rollNo}
-        onChange={(e) => setRollNo(e.target.value)}
-      />
-
-      <button onClick={fetchAttendance}>View Attendance</button>
-
-      <ul>
-        {records.map((r, i) => (
-          <li key={i}>
-            {r.date} - {r.status}
-          </li>
-        ))}
-      </ul>
+      <p>Total Classes: {total}</p>
+      <p>Present: {present}</p>
+      <p>Absent: {absent}</p>
+      <p>Attendance %: {percentage}%</p>
     </div>
   );
 }
